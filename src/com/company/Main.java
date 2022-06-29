@@ -75,84 +75,91 @@ public class Main {
             System.out.println("|Kies uit één van de volgende opties:      |");
             System.out.println("|1. Opdracht markeren klaar voor controle  |");
             if (activeGebruiker.getRol().equals("Opdrachtgever")) {
-                System.out.println("|2. Opdracht afgerond                      |");
-                System.out.println("|3. Nieuwe Opdracht aanmaken               |");
-                System.out.println("|4. Opdracht verwijderen                   |");
-                System.out.println("|5. Afsluiten                              |");
-                System.out.println("|------------------------------------------|");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-                switch (choice) {
-                    case 1 -> {
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|       Opdracht klaar voor controle       |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Opdracht nummer:                          |");
-                        int nummerKlaarVoorControle = scanner.nextInt();
-                        activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
-                    }
-                    case 2 -> {
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|             Opdracht afronden            |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Opdracht nummer:                          |");
-                        int nummerAfgerond = scanner.nextInt();
-                        activeGebruiker.setAfgerond(nummerAfgerond);
-                    }
-                    case 3 -> {
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|         Nieuwe Opdracht aanmaken         |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Title :                                   |");
-                        String title = scanner.nextLine();
-                        System.out.println("|Beschrijving:                             |");
-                        String beschrijving = scanner.nextLine();
-                        System.out.println("|Deadline jaar:                            |");
-                        int year = scanner.nextInt();
-                        System.out.println("|Deadline maand:                           |");
-                        int month = scanner.nextInt();
-                        System.out.println("|Deadline dag:                             |");
-                        int day = scanner.nextInt();
-                        scanner.nextLine();
-                        LocalDate deadline = LocalDate.of(year, month, day);
-                        System.out.println("|Type (Water/Groen/Afval):                 |");
-                        String type = scanner.nextLine();
-                        activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
-                    }
-                    case 4 -> {
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|           Opdracht verwijderen           |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Opdracht nummer:                          |");
-                        int nummerVerwijderen = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("| Weet u zeker dat u opdracht " + nummerVerwijderen + " wilt verwijderen |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Ja of Nee (y/n):                          |");
-                        String keuzen = scanner.nextLine();
-                        if (keuzen.equals("y") || keuzen.equals("Y")) {
-                            activeGebruiker.removeOpdracht(nummerVerwijderen);
-                        }
-                    }
-                    case 5 -> exit = true;
-                }
+                menuOpdrachtGever();
             } else {
-                System.out.println("|2. Afsluiten                              |");
+                menuAannemer();
+            }
+        }
+    }
+    public static void menuOpdrachtGever() {
+        System.out.println("|2. Opdracht afgerond                      |");
+        System.out.println("|3. Nieuwe Opdracht aanmaken               |");
+        System.out.println("|4. Opdracht verwijderen                   |");
+        System.out.println("|5. Afsluiten                              |");
+        System.out.println("|------------------------------------------|");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        switch (choice) {
+            case 1 -> {
                 System.out.println("|------------------------------------------|");
-                int choice = scanner.nextInt();
-                switch (choice) {
-                    case 1 -> {
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|       Opdracht klaar voor controle       |");
-                        System.out.println("|------------------------------------------|");
-                        System.out.println("|Opdracht nummer:                          |");
-                        int nummerKlaarVoorControle = scanner.nextInt();
-                        activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
-                    }
-                    case 2 -> exit = true;
+                System.out.println("|       Opdracht klaar voor controle       |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Opdracht nummer:                          |");
+                int nummerKlaarVoorControle = scanner.nextInt();
+                activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
+            }
+            case 2 -> {
+                System.out.println("|------------------------------------------|");
+                System.out.println("|             Opdracht afronden            |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Opdracht nummer:                          |");
+                int nummerAfgerond = scanner.nextInt();
+                activeGebruiker.setAfgerond(nummerAfgerond);
+            }
+            case 3 -> {
+                System.out.println("|------------------------------------------|");
+                System.out.println("|         Nieuwe Opdracht aanmaken         |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Title :                                   |");
+                String title = scanner.nextLine();
+                System.out.println("|Beschrijving:                             |");
+                String beschrijving = scanner.nextLine();
+                System.out.println("|Deadline jaar:                            |");
+                int year = scanner.nextInt();
+                System.out.println("|Deadline maand:                           |");
+                int month = scanner.nextInt();
+                System.out.println("|Deadline dag:                             |");
+                int day = scanner.nextInt();
+                scanner.nextLine();
+                LocalDate deadline = LocalDate.of(year, month, day);
+                System.out.println("|Type (Water/Groen/Afval):                 |");
+                String type = scanner.nextLine();
+                activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
+            }
+            case 4 -> {
+                System.out.println("|------------------------------------------|");
+                System.out.println("|           Opdracht verwijderen           |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Opdracht nummer:                          |");
+                int nummerVerwijderen = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("|------------------------------------------|");
+                System.out.println("| Weet u zeker dat u opdracht " + nummerVerwijderen + " wilt verwijderen |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Ja of Nee (y/n):                          |");
+                String keuzen = scanner.nextLine();
+                if (keuzen.equals("y") || keuzen.equals("Y")) {
+                    activeGebruiker.removeOpdracht(nummerVerwijderen);
                 }
             }
+            case 5 -> exit = true;
+        }
+    }
+
+    public static void menuAannemer() {
+        System.out.println("|2. Afsluiten                              |");
+        System.out.println("|------------------------------------------|");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1 -> {
+                System.out.println("|------------------------------------------|");
+                System.out.println("|       Opdracht klaar voor controle       |");
+                System.out.println("|------------------------------------------|");
+                System.out.println("|Opdracht nummer:                          |");
+                int nummerKlaarVoorControle = scanner.nextInt();
+                activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
+            }
+            case 2 -> exit = true;
         }
     }
 
