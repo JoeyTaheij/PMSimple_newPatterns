@@ -1,248 +1,214 @@
 package com.company;
 
+import java.awt.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static boolean logedIn = false;
+    static boolean exit = false;
+    static Gebruiker activeGebruiker = null;
 
     public static void main(String[] args) {
 //    ---------------------------------------------------------------------------------------------------------------------------
-//                               Initialiseren van de Eerste opdrachtgever, aannemer en Opdrachten
+//                               Initialiseren van de Eerste opdrachtgever, aannemers en Opdrachten
 //    ---------------------------------------------------------------------------------------------------------------------------
 
-        Opdrachtgever opdrachtgever1 = new Opdrachtgever(1, "Danny", "test@test.nl", "0634225234", "WWOpdrachtgever");
-        Aannemer aannemer1 = new Aannemer(1, "Joey", "test@test.nl", "0613234493", "WWAannemer");
-        opdrachtgever1.newOpdracht(0, "opdracht 1", "test Opdracht 1", "2022-05-04");
-        opdrachtgever1.newOpdracht(1, "opdracht 2", "test Opdracht 2", "2022-05-05");
-        opdrachtgever1.newOpdracht(2, "opdracht 3", "test Opdracht 3", "2022-05-06");
+        init();
 
 //    ---------------------------------------------------------------------------------------------------------------------------
-//                                                      Wat er mogelijk is
+//                                                           Code
 //    ---------------------------------------------------------------------------------------------------------------------------
 
-        System.out.println("\nAannemer kan de Klaar voor controle variable naar true zetten");
-        aannemer1.setKlaarVoorControle(0);
-        System.out.println(aannemer1.getOpdracht(0));
-
-
-        System.out.println("\nOpdrachtLijst Uitprinten vanuit een aannemer");
-        aannemer1.printOpdrachtLijst();
-
-
-        System.out.println("\nOpdrachtgever kan een nieuwe opdracht aanmaken");
-        opdrachtgever1.newOpdracht(3, "opdracht 4", "test Opdracht 4", "2022-05-07");
-        System.out.println(opdrachtgever1.getOpdracht(3));
-
-        System.out.println("\nOpdrachtLijst Uitprinten vanuit een opdrachtgever");
-        opdrachtgever1.printOpdrachtLijst();
-
-
-        System.out.println("\nOpdrachtgever kan de afgerond variable naar true zetten");
-        opdrachtgever1.setAfgerond(0);
-        System.out.println(opdrachtgever1.getOpdracht(0));
-
-
-        System.out.println("\nOpdrachtgever kan een opdracht aanroepen");
-        System.out.println(opdrachtgever1.getOpdracht(0));
-
-        System.out.println("\nOpdrachtgever kan een opdracht aanpassen");
-        opdrachtgever1.getOpdracht(0).setTitel("Nieuwe titel");
-        opdrachtgever1.getOpdracht(0).setBeschrijving("Nieuwe bescrijving");
-        opdrachtgever1.getOpdracht(0).setDeadline("2022-06-07");
-        System.out.println(opdrachtgever1.getOpdracht(0));
-    }
-}
-
-abstract class Gebruiker {
-    protected int id;
-    protected String naam;
-    protected String email;
-    protected String telefoon;
-    protected String wachtwoord;
-
-    public int getId() {
-        return id;
-    }
-    public String getNaam() {
-        return naam;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public String getTelefoon() {
-        return telefoon;
-    }
-    public String getWachtwoord() {
-        return wachtwoord;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setNaam(String naam) {
-        this.naam = naam;
-    }
-    public void setTelefoon(String telefoon) {
-        this.telefoon = telefoon;
-    }
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
+        login();
+        menu();
     }
 
-//    ---------------------------------------------------------------------------------------------------------------------------
-//                                               Algemene gebruikers methodes
-//    ---------------------------------------------------------------------------------------------------------------------------
+    public static void init() {
+        Opdrachtgever dannyTaheij = new Opdrachtgever(1, "Danny", "Danny", "0634225234", "test");
+        Aannemer joeyTaheij = new Aannemer(1, "Joey", "Joey", "0613234493", "test");
+        Aannemer test = new Aannemer(2, "test", "test", "0613234493", "test");
+        GebruikerLijst.add(dannyTaheij);
+        GebruikerLijst.add(joeyTaheij);
+        GebruikerLijst.add(test);
+        dannyTaheij.subscribe(joeyTaheij);
+        dannyTaheij.subscribe(test);
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Water", "Test1", "Test beschrijving 1", LocalDate.of(2022, 2, 15)));
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Groen", "Test2", "Test beschrijving 2", LocalDate.of(2022, 2, 15)));
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Afval", "Test3", "Test beschrijving 3", LocalDate.of(2022, 2, 15)));
 
-    public Opdracht getOpdracht(int opdracht) {
-        return OpdrachtLijst.get(opdracht);
     }
 
-    public void printOpdrachtLijst() {
-        for (int i = 0; i < OpdrachtLijst.getOpdrachtlijst().size(); i++) {
-            System.out.println(OpdrachtLijst.get(i));
+    public static void login() {
+        while (!logedIn) {
+            System.out.println("|------------------------------------------|");
+            System.out.println("|                  Login                   |");
+            System.out.println("|------------------------------------------|");
+            System.out.println("|E-mail:                                   |");
+            String email = scanner.nextLine();
+            System.out.println("|Password:                                 |");
+            String password = scanner.nextLine();
+            for (int i = 0; i < GebruikerLijst.getGebruikerLijst().size(); i++) {
+                if (email.equals(GebruikerLijst.getGebruikerLijst().get(i).email)) {
+                    if (password.equals(GebruikerLijst.getGebruikerLijst().get(i).wachtwoord)) {
+                        logedIn = true;
+                        activeGebruiker = GebruikerLijst.get(i);
+                    } else {
+                        System.out.println("|Password is incorrect                     |");
+                    }
+                }
+            }
         }
     }
-}
-
-class Opdrachtgever extends Gebruiker {
-
-    public Opdrachtgever(int id, String naam, String email, String telefoon, String wachtwoord) {
-        this.id = id;
-        this.naam = naam;
-        this.email = email;
-        this.telefoon = telefoon;
-        this.wachtwoord = wachtwoord;
+    public static void menu() {
+        while (!exit) {
+            System.out.println("|------------------------------------------|");
+            System.out.println("               Welcome " + activeGebruiker.naam);
+            System.out.println("|------------------------------------------|");
+            System.out.println("|Alle opdrachten:                          |");
+            System.out.println("");
+            activeGebruiker.getOpdrachtlijstString();
+            System.out.println("|------------------------------------------|");
+            System.out.println("|Kies uit één van de volgende opties:      |");
+            System.out.println("|1. Opdracht markeren klaar voor controle  |");
+            if (activeGebruiker.getRol().equals("Opdrachtgever")) {
+                System.out.println("|2. Opdracht afgerond                      |");
+                System.out.println("|3. Nieuwe Opdracht aanmaken               |");
+                System.out.println("|4. Opdracht verwijderen                   |");
+                System.out.println("|5. Afsluiten                              |");
+                System.out.println("|------------------------------------------|");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1 -> {
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|       Opdracht klaar voor controle       |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Opdracht nummer:                          |");
+                        int nummerKlaarVoorControle = scanner.nextInt();
+                        activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
+                    }
+                    case 2 -> {
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|             Opdracht afronden            |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Opdracht nummer:                          |");
+                        int nummerAfgerond = scanner.nextInt();
+                        activeGebruiker.setAfgerond(nummerAfgerond);
+                    }
+                    case 3 -> {
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|         Nieuwe Opdracht aanmaken         |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Title :                                   |");
+                        String title = scanner.nextLine();
+                        System.out.println("|Beschrijving:                             |");
+                        String beschrijving = scanner.nextLine();
+                        System.out.println("|Deadline jaar:                            |");
+                        int year = scanner.nextInt();
+                        System.out.println("|Deadline maand:                           |");
+                        int month = scanner.nextInt();
+                        System.out.println("|Deadline dag:                             |");
+                        int day = scanner.nextInt();
+                        scanner.nextLine();
+                        LocalDate deadline = LocalDate.of(year, month, day);
+                        System.out.println("|Type (Water/Groen/Afval):                 |");
+                        String type = scanner.nextLine();
+                        activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
+                    }
+                    case 4 -> {
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|           Opdracht verwijderen           |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Opdracht nummer:                          |");
+                        int nummerVerwijderen = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("| Weet u zeker dat u opdracht " + nummerVerwijderen + " wilt verwijderen |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Ja of Nee (y/n):                          |");
+                        String keuzen = scanner.nextLine();
+                        if (keuzen.equals("y") || keuzen.equals("Y")) {
+                            activeGebruiker.removeOpdracht(nummerVerwijderen);
+                        }
+                    }
+                    case 5 -> exit = true;
+                }
+            } else {
+                System.out.println("|2. Afsluiten                              |");
+                System.out.println("|------------------------------------------|");
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1 -> {
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|       Opdracht klaar voor controle       |");
+                        System.out.println("|------------------------------------------|");
+                        System.out.println("|Opdracht nummer:                          |");
+                        int nummerKlaarVoorControle = scanner.nextInt();
+                        activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
+                    }
+                    case 2 -> exit = true;
+                }
+            }
+        }
     }
 
-    public String toString() {
-        return "Opdrachtgever{" +
-                "id=" + id +
-                ", naam='" + naam + '\'' +
-                ", email='" + email + '\'' +
-                ", telefoon='" + telefoon + '\'' +
-                ", wachtwoord='" + wachtwoord + '\'' +
-                '}';
-    }
 
-//    ---------------------------------------------------------------------------------------------------------------------------
-//                                               Opdrachtgever methodes
-//    ---------------------------------------------------------------------------------------------------------------------------
 
-    public void newOpdracht(int id, String titel, String beschrijving, String deadline) {
-        OpdrachtLijst.add(new Opdracht(id,titel, beschrijving, deadline));
-    }
 
-    public void setAfgerond(int opdracht) {
-        getOpdracht(opdracht).setAfgerond(true);
-    }
-}
 
-class Aannemer extends Gebruiker {
 
-    public Aannemer(int id, String naam, String email, String telefoon, String wachtwoord) {
-        this.id = id;
-        this.naam = naam;
-        this.email = email;
-        this.telefoon = telefoon;
-        this.wachtwoord = wachtwoord;
-    }
 
-    public String toString() {
-        return "Aannemer{" +
-                "id=" + id +
-                ", naam='" + naam + '\'' +
-                ", email='" + email + '\'' +
-                ", telefoon='" + telefoon + '\'' +
-                ", wachtwoord='" + wachtwoord + '\'' +
-                '}';
-    }
 
-//    ---------------------------------------------------------------------------------------------------------------------------
-//                                               Aannemer methodes
-//    ---------------------------------------------------------------------------------------------------------------------------
 
-    public void setKlaarVoorControle(int opdracht) {
-        getOpdracht(opdracht).setKlaarVoorControle(true);
-    }
-}
 
-abstract class OpdrachtLijst {
-    private static final ArrayList<Opdracht> opdrachtlijst = new ArrayList<Opdracht>();
 
-    public static ArrayList<Opdracht> getOpdrachtlijst() {
-        return opdrachtlijst;
-    }
 
-    public static void add(Opdracht opdracht) {
-        opdrachtlijst.add(opdracht);
-    }
 
-    public static Opdracht get(int id) {
-        return opdrachtlijst.get(id);
-    }
-}
 
-class Opdracht extends OpdrachtLijst{
-    private int id;
-    private String titel;
-    private String beschrijving;
-    private String deadline;
-    private Boolean klaarVoorControle = false;
-    private Boolean afgerond = false;
 
-    public Opdracht(int id, String titel, String beschrijving, String deadline) {
-        this.id = id;
-        this.titel = titel;
-        this.beschrijving = beschrijving;
-        this.deadline = deadline;
-    }
 
-    public String toString() {
-        return "Opdracht{" +
-                "id=" + id +
-                ", titel='" + titel + '\'' +
-                ", beschrijving='" + beschrijving + '\'' +
-                ", deadline='" + deadline + '\'' +
-                ", klaarVoorControle=" + klaarVoorControle +
-                ", afgerond=" + afgerond +
-                '}';
-    }
 
-    public int getId() {
-        return id;
-    }
-    public Boolean getAfgerond() {
-        return afgerond;
-    }
-    public Boolean getKlaarVoorControle() {
-        return klaarVoorControle;
-    }
-    public String getBeschrijving() {
-        return beschrijving;
-    }
-    public String getDeadline() {
-        return deadline;
-    }
-    public String getTitel() {
-        return titel;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setAfgerond(Boolean afgerond) {
-        this.afgerond = afgerond;
-    }
-    public void setBeschrijving(String beschrijving) {
-        this.beschrijving = beschrijving;
-    }
-    public void setKlaarVoorControle(Boolean klaarVoorControle) {
-        this.klaarVoorControle = klaarVoorControle;
-    }
-    public void setTitel(String titel) {
-        this.titel = titel;
-    }
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
+
+
+
+
+
+
+
+
+
+
+
+//    public static void Login() {
+//        Scanner scanner = new Scanner(System.in);
+//        while (true) {
+//            System.out.println("----------------------------------------");
+//            System.out.println("                 Login                  ");
+//            System.out.println("----------------------------------------");
+//            System.out.println("E-mail: ");
+//            String email = scanner.nextLine();
+//            System.out.println("Password: ");
+//            String password = scanner.nextLine();
+//            if (email.equals(dannyTaheij.email) && password.equals(dannyTaheij.wachtwoord)) {
+//                return dannyTaheij;
+//            } else if (email.equals(joeyTaheij.email) && password.equals(joeyTaheij.wachtwoord)) {
+//                return joeyTaheij;
+//            } else {
+//                System.out.println("User dose not exist!");
+//            }
+//        }
+//    }
+
+    public static void Menu(Gebruiker gebruiker) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("----------------------------------------");
+        System.out.println("             Welcome " + gebruiker.naam + "                 ");
+        System.out.println("----------------------------------------");
+
     }
 }
