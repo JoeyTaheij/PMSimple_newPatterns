@@ -81,6 +81,7 @@ public class Main {
             }
         }
     }
+
     public static void menuOpdrachtGever() {
         System.out.println("|2. Opdracht afgerond                      |");
         System.out.println("|3. Nieuwe Opdracht aanmaken               |");
@@ -90,58 +91,10 @@ public class Main {
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
-            case 1 -> {
-                System.out.println("|------------------------------------------|");
-                System.out.println("|       Opdracht klaar voor controle       |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Opdracht nummer:                          |");
-                int nummerKlaarVoorControle = scanner.nextInt();
-                activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
-            }
-            case 2 -> {
-                System.out.println("|------------------------------------------|");
-                System.out.println("|             Opdracht afronden            |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Opdracht nummer:                          |");
-                int nummerAfgerond = scanner.nextInt();
-                activeGebruiker.setAfgerond(nummerAfgerond);
-            }
-            case 3 -> {
-                System.out.println("|------------------------------------------|");
-                System.out.println("|         Nieuwe Opdracht aanmaken         |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Title :                                   |");
-                String title = scanner.nextLine();
-                System.out.println("|Beschrijving:                             |");
-                String beschrijving = scanner.nextLine();
-                System.out.println("|Deadline jaar:                            |");
-                int year = scanner.nextInt();
-                System.out.println("|Deadline maand:                           |");
-                int month = scanner.nextInt();
-                System.out.println("|Deadline dag:                             |");
-                int day = scanner.nextInt();
-                scanner.nextLine();
-                LocalDate deadline = LocalDate.of(year, month, day);
-                System.out.println("|Type (Water/Groen/Afval):                 |");
-                String type = scanner.nextLine();
-                activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
-            }
-            case 4 -> {
-                System.out.println("|------------------------------------------|");
-                System.out.println("|           Opdracht verwijderen           |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Opdracht nummer:                          |");
-                int nummerVerwijderen = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println("|------------------------------------------|");
-                System.out.println("| Weet u zeker dat u opdracht " + nummerVerwijderen + " wilt verwijderen |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Ja of Nee (y/n):                          |");
-                String keuzen = scanner.nextLine();
-                if (keuzen.equals("y") || keuzen.equals("Y")) {
-                    activeGebruiker.removeOpdracht(nummerVerwijderen);
-                }
-            }
+            case 1 -> menuOpdrachtgeverOne();
+            case 2 -> menuOpdrachtgeverTwo();
+            case 3 -> menuOpdrachtgeverThree();
+            case 4 -> menuOpdrachtgeverFour();
             case 5 -> exit = true;
         }
     }
@@ -151,71 +104,61 @@ public class Main {
         System.out.println("|------------------------------------------|");
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> {
-                System.out.println("|------------------------------------------|");
-                System.out.println("|       Opdracht klaar voor controle       |");
-                System.out.println("|------------------------------------------|");
-                System.out.println("|Opdracht nummer:                          |");
-                int nummerKlaarVoorControle = scanner.nextInt();
-                activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
-            }
+            case 1 -> menuOpdrachtgeverOne();
             case 2 -> exit = true;
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static void Login() {
-//        Scanner scanner = new Scanner(System.in);
-//        while (true) {
-//            System.out.println("----------------------------------------");
-//            System.out.println("                 Login                  ");
-//            System.out.println("----------------------------------------");
-//            System.out.println("E-mail: ");
-//            String email = scanner.nextLine();
-//            System.out.println("Password: ");
-//            String password = scanner.nextLine();
-//            if (email.equals(dannyTaheij.email) && password.equals(dannyTaheij.wachtwoord)) {
-//                return dannyTaheij;
-//            } else if (email.equals(joeyTaheij.email) && password.equals(joeyTaheij.wachtwoord)) {
-//                return joeyTaheij;
-//            } else {
-//                System.out.println("User dose not exist!");
-//            }
-//        }
-//    }
-
-    public static void Menu(Gebruiker gebruiker) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("----------------------------------------");
-        System.out.println("             Welcome " + gebruiker.naam + "                 ");
-        System.out.println("----------------------------------------");
-
+    public static void menuOpdrachtgeverOne() {
+        System.out.println("|------------------------------------------|");
+        System.out.println("|       Opdracht klaar voor controle       |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|Opdracht nummer:                          |");
+        int nummerKlaarVoorControle = scanner.nextInt();
+        activeGebruiker.setKlaarVoorControle(nummerKlaarVoorControle);
+    }
+    public static void menuOpdrachtgeverTwo() {
+        System.out.println("|------------------------------------------|");
+        System.out.println("|             Opdracht afronden            |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|Opdracht nummer:                          |");
+        int nummerAfgerond = scanner.nextInt();
+        activeGebruiker.setAfgerond(nummerAfgerond);
+    }
+    public static void menuOpdrachtgeverThree() {
+        System.out.println("|------------------------------------------|");
+        System.out.println("|         Nieuwe Opdracht aanmaken         |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|Title :                                   |");
+        String title = scanner.nextLine();
+        System.out.println("|Beschrijving:                             |");
+        String beschrijving = scanner.nextLine();
+        System.out.println("|Deadline jaar:                            |");
+        int year = scanner.nextInt();
+        System.out.println("|Deadline maand:                           |");
+        int month = scanner.nextInt();
+        System.out.println("|Deadline dag:                             |");
+        int day = scanner.nextInt();
+        scanner.nextLine();
+        LocalDate deadline = LocalDate.of(year, month, day);
+        System.out.println("|Type (Water/Groen/Afval):                 |");
+        String type = scanner.nextLine();
+        activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
+    }
+    public static void menuOpdrachtgeverFour() {
+        System.out.println("|------------------------------------------|");
+        System.out.println("|           Opdracht verwijderen           |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|Opdracht nummer:                          |");
+        int nummerVerwijderen = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("|------------------------------------------|");
+        System.out.println("| Weet u zeker dat u opdracht " + nummerVerwijderen + " wilt verwijderen |");
+        System.out.println("|------------------------------------------|");
+        System.out.println("|Ja of Nee (y/n):                          |");
+        String keuzen = scanner.nextLine();
+        if (keuzen.equals("y") || keuzen.equals("Y")) {
+            activeGebruiker.removeOpdracht(nummerVerwijderen);
+        }
     }
 }
