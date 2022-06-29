@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 abstract class Gebruiker {
-    protected int id;
     protected String naam;
     protected String email;
     protected String telefoon;
@@ -17,9 +16,6 @@ abstract class Gebruiker {
     }
     public void setRol(String rol) {
         this.rol = rol;
-    }
-    public int getId() {
-        return id;
     }
     public String getNaam() {
         return naam;
@@ -35,9 +31,6 @@ abstract class Gebruiker {
     }
     public void setEmail(String email) {
         this.email = email;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public void setNaam(String naam) {
         this.naam = naam;

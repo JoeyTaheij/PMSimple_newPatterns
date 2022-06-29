@@ -4,10 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 class Opdrachtgever extends Gebruiker {
-    private final ArrayList<Gebruiker> subscribers = new ArrayList<Gebruiker>();
+    private final ArrayList<Gebruiker> subscribers = new ArrayList<>();
 
-    public Opdrachtgever(int id, String naam, String email, String telefoon, String wachtwoord) {
-        this.id = id;
+    public Opdrachtgever(String naam, String email, String telefoon, String wachtwoord) {
         this.naam = naam;
         this.email = email;
         this.telefoon = telefoon;
@@ -17,7 +16,6 @@ class Opdrachtgever extends Gebruiker {
 
     public String toString() {
         return "Opdrachtgever{" +
-                "id=" + id +
                 ", naam='" + naam + '\'' +
                 ", email='" + email + '\'' +
                 ", telefoon='" + telefoon + '\'' +

@@ -4,8 +4,7 @@ import java.time.LocalDate;
 
 class Aannemer extends Gebruiker implements Subscriber {
 
-    public Aannemer(int id, String naam, String email, String telefoon, String wachtwoord) {
-        this.id = id;
+    public Aannemer(String naam, String email, String telefoon, String wachtwoord) {
         this.naam = naam;
         this.email = email;
         this.telefoon = telefoon;
@@ -15,7 +14,6 @@ class Aannemer extends Gebruiker implements Subscriber {
 
     public String toString() {
         return "Aannemer{" +
-                "id=" + id +
                 ", naam='" + naam + '\'' +
                 ", email='" + email + '\'' +
                 ", telefoon='" + telefoon + '\'' +

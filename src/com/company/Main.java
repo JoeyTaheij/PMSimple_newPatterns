@@ -28,9 +28,9 @@ public class Main {
     }
 
     public static void init() {
-        Opdrachtgever dannyTaheij = new Opdrachtgever(1, "Danny", "Danny", "0634225234", "test");
-        Aannemer joeyTaheij = new Aannemer(1, "Joey", "Joey", "0613234493", "test");
-        Aannemer test = new Aannemer(2, "test", "test", "0613234493", "test");
+        Opdrachtgever dannyTaheij = new Opdrachtgever("Danny", "Danny", "0634225234", "test");
+        Aannemer joeyTaheij = new Aannemer("Joey", "Joey", "0613234493", "test");
+        Aannemer test = new Aannemer("test", "test", "0613234493", "test");
         GebruikerLijst.add(dannyTaheij);
         GebruikerLijst.add(joeyTaheij);
         GebruikerLijst.add(test);

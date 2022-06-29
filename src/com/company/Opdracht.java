@@ -5,8 +5,8 @@ import java.time.LocalDate;
 abstract class Opdracht {
     protected String titel;
     protected String beschrijving;
-    protected String type;
     protected LocalDate deadline;
+    protected String type;
     protected State state = new Nieuw();
 
     public String toString(int position) {
@@ -50,3 +50,4 @@ abstract class Opdracht {
         this.type = type;
     }
 }
+
