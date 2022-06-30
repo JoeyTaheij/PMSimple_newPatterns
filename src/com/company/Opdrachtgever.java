@@ -7,18 +7,17 @@ class Opdrachtgever extends Gebruiker {
     private final ArrayList<Gebruiker> subscribers = new ArrayList<>();
 
     public Opdrachtgever(String naam, String email, String telefoon, String wachtwoord) {
-        this.naam = naam;
         this.email = email;
-        this.telefoon = telefoon;
         this.wachtwoord = wachtwoord;
+        this.persoonsGegevens = new PersoonsGegevens(naam, telefoon);
         this.rol = "Opdrachtgever";
     }
 
     public String toString() {
         return "Opdrachtgever{" +
-                ", naam='" + naam + '\'' +
+                ", naam='" + persoonsGegevens.getNaam() + '\'' +
                 ", email='" + email + '\'' +
-                ", telefoon='" + telefoon + '\'' +
+                ", telefoon='" + persoonsGegevens.getTelefoon() + '\'' +
                 ", wachtwoord='" + wachtwoord + '\'' +
                 '}';
     }

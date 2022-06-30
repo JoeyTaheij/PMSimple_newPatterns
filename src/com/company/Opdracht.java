@@ -27,9 +27,6 @@ abstract class Opdracht {
     public String getTitel() {
         return titel;
     }
-    public String getType() {
-        return type;
-    }
     public State getState() {
         return state;
     }

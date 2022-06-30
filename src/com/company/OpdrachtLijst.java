@@ -2,8 +2,8 @@ package com.company;
 
 import java.util.ArrayList;
 
-class OpdrachtLijst {
-    private static final ArrayList<Opdracht> opdrachtlijst = new ArrayList<Opdracht>();
+public class OpdrachtLijst {
+    private static final ArrayList<Opdracht> opdrachtlijst = new ArrayList<>();
 
     public static ArrayList<Opdracht> getOpdrachtlijst() {
         return opdrachtlijst;

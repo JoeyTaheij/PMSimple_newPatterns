@@ -5,18 +5,17 @@ import java.time.LocalDate;
 class Aannemer extends Gebruiker implements Subscriber {
 
     public Aannemer(String naam, String email, String telefoon, String wachtwoord) {
-        this.naam = naam;
         this.email = email;
-        this.telefoon = telefoon;
         this.wachtwoord = wachtwoord;
+        this.persoonsGegevens = new PersoonsGegevens(naam, telefoon);
         this.rol = "Aannemer";
     }
 
     public String toString() {
         return "Aannemer{" +
-                ", naam='" + naam + '\'' +
+                ", naam='" + persoonsGegevens.getNaam() + '\'' +
                 ", email='" + email + '\'' +
-                ", telefoon='" + telefoon + '\'' +
+                ", telefoon='" + persoonsGegevens.getTelefoon() + '\'' +
                 ", wachtwoord='" + wachtwoord + '\'' +
                 '}';
     }

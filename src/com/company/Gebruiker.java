@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 abstract class Gebruiker {
-    protected String naam;
     protected String email;
-    protected String telefoon;
     protected String wachtwoord;
+    protected PersoonsGegevens persoonsGegevens;
     protected String rol;
 
     public String getRol() {
@@ -18,13 +17,13 @@ abstract class Gebruiker {
         this.rol = rol;
     }
     public String getNaam() {
-        return naam;
+        return persoonsGegevens.getNaam();
     }
     public String getEmail() {
         return email;
     }
     public String getTelefoon() {
-        return telefoon;
+        return persoonsGegevens.getTelefoon();
     }
     public String getWachtwoord() {
         return wachtwoord;
@@ -33,10 +32,10 @@ abstract class Gebruiker {
         this.email = email;
     }
     public void setNaam(String naam) {
-        this.naam = naam;
+        this.persoonsGegevens.setNaam(naam);
     }
     public void setTelefoon(String telefoon) {
-        this.telefoon = telefoon;
+        this.persoonsGegevens.setTelefoon(telefoon);
     }
     public void setWachtwoord(String wachtwoord) {
         this.wachtwoord = wachtwoord;
@@ -74,4 +73,31 @@ abstract class Gebruiker {
     public abstract void setAfgerond(int opdracht);
     public abstract void removeOpdracht(int opdracht);
     public abstract void newOpdracht(String type, String titel, String beschrijving, LocalDate deadline);
+}
+
+
+class PersoonsGegevens {
+    String naam;
+    String telefoon;
+
+    public PersoonsGegevens(String naam, String telefoon) {
+        this.naam = naam;
+        this.telefoon = telefoon;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
+
+    public String getTelefoon() {
+        return telefoon;
+    }
+
+    public void setTelefoon(String telefoon) {
+        this.telefoon = telefoon;
+    }
 }

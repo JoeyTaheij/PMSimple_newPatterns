@@ -66,7 +66,7 @@ public class Main {
     public static void menu() {
         while (!exit) {
             System.out.println("|------------------------------------------|");
-            System.out.println("               Welcome " + activeGebruiker.naam);
+            System.out.println("               Welcome " + activeGebruiker.persoonsGegevens.getNaam());
             System.out.println("|------------------------------------------|");
             System.out.println("|Alle opdrachten:                          |");
             System.out.println("");
@@ -91,11 +91,11 @@ public class Main {
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
-            case 1 -> menuOpdrachtgeverOne();
+            case 1 -> menuOne();
             case 2 -> menuOpdrachtgeverTwo();
             case 3 -> menuOpdrachtgeverThree();
             case 4 -> menuOpdrachtgeverFour();
-            case 5 -> exit = true;
+            case 5 -> menuExit();
         }
     }
 
@@ -104,12 +104,16 @@ public class Main {
         System.out.println("|------------------------------------------|");
         int choice = scanner.nextInt();
         switch (choice) {
-            case 1 -> menuOpdrachtgeverOne();
-            case 2 -> exit = true;
+            case 1 -> menuOne();
+            case 2 -> menuExit();
         }
     }
 
-    public static void menuOpdrachtgeverOne() {
+    public static void menuExit() {
+        exit = true;
+    }
+
+    public static void menuOne() {
         System.out.println("|------------------------------------------|");
         System.out.println("|       Opdracht klaar voor controle       |");
         System.out.println("|------------------------------------------|");
