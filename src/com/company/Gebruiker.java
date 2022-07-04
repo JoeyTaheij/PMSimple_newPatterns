@@ -2,7 +2,6 @@ package com.company;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 abstract class Gebruiker {
     protected String email;

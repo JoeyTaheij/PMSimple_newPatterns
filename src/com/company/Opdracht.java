@@ -18,6 +18,22 @@ abstract class Opdracht {
                 "States: " + state.getState() + '\n';
     }
 
+    final void makeOpdracht() {
+        if (opdrachtWantsImage()) {
+            addImage();
+        }
+
+        if (opdrachtWantsLocation()) {
+            addLocation();
+        }
+
+        if (opdrachtIsUrgent()) {
+            addUrgentie();
+        }
+
+        addOpdracht();
+    }
+
     public String getBeschrijving() {
         return beschrijving;
     }
@@ -45,6 +61,20 @@ abstract class Opdracht {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    abstract void addImage();
+    abstract void addLocation();
+    public void addUrgentie() {
+        System.out.println("Deze opdracht is urgent!!");
+    }
+
+    boolean opdrachtWantsImage() {return false;}
+    boolean opdrachtWantsLocation() {return true;}
+    boolean opdrachtIsUrgent() {return false;}
+
+    public void addOpdracht() {
+        System.out.println("De opdracht met titel: "+ titel +", is aangemaakt!");
     }
 }
 

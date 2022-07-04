@@ -37,8 +37,9 @@ public class Main {
         dannyTaheij.subscribe(joeyTaheij);
         dannyTaheij.subscribe(test);
         OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Water", "Test1", "Test beschrijving 1", LocalDate.of(2022, 2, 15)));
-        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Groen", "Test2", "Test beschrijving 2", LocalDate.of(2022, 2, 15)));
-        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Afval", "Test3", "Test beschrijving 3", LocalDate.of(2022, 2, 15)));
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Groen", "Test2", "Test beschrijving 2", LocalDate.of(2022, 2, 22)));
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Afval", "Test3", "Test beschrijving 3", LocalDate.of(2022, 2, 23)));
+        OpdrachtLijst.add(OpdrachtFactory.newOpdracht("Berm", "Test4", "Test beschrijving 4", LocalDate.of(2022, 2, 25)));
 
     }
 
@@ -145,7 +146,7 @@ public class Main {
         int day = scanner.nextInt();
         scanner.nextLine();
         LocalDate deadline = LocalDate.of(year, month, day);
-        System.out.println("|Type (Water/Groen/Afval):                 |");
+        System.out.println("|Type (Water/Groen/Afval/Berm):            |");
         String type = scanner.nextLine();
         activeGebruiker.newOpdracht(type, title, beschrijving, deadline);
     }

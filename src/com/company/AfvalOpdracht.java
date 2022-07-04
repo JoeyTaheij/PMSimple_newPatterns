@@ -9,4 +9,24 @@ public class AfvalOpdracht extends Opdracht{
         this.deadline = deadline;
         this.type = "Afval";
     }
+
+    @Override
+    void addImage() {
+        System.out.println("Afval Image has been added!");
+    }
+
+    @Override
+    void addLocation() {
+        System.out.println("Afval Location has been added!");
+    }
+
+    @Override
+    boolean opdrachtWantsImage() {
+        return true;
+    }
+
+    @Override
+    boolean opdrachtIsUrgent() {
+        return true;
+    }
 }

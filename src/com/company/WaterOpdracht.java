@@ -9,4 +9,19 @@ public class WaterOpdracht extends Opdracht {
         this.deadline = deadline;
         this.type = "Water";
     }
+
+    @Override
+    void addImage() {
+        System.out.println("Water Image has been added!");
+    }
+
+    @Override
+    void addLocation() {
+        System.out.println("Water Location has been added!");
+    }
+
+    @Override
+    boolean opdrachtWantsImage() {
+        return true;
+    }
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 class Opdrachtgever extends Gebruiker {
-    private final ArrayList<Gebruiker> subscribers = new ArrayList<>();
+    private final ArrayList<Subscriber> subscribers = new ArrayList<>();
 
     public Opdrachtgever(String naam, String email, String telefoon, String wachtwoord) {
         this.email = email;
@@ -25,16 +25,16 @@ class Opdrachtgever extends Gebruiker {
 //    ---------------------------------------------------------------------------------------------------------------------------
 //                                               Opdrachtgever methodes
 //    ---------------------------------------------------------------------------------------------------------------------------
-    public void subscribe(Gebruiker gebruiker){
-        subscribers.add(gebruiker);
+    public void subscribe(Subscriber subscriber){
+        subscribers.add(subscriber);
     }
-    public void unSubscribe(Gebruiker gebruiker){
-        subscribers.remove(gebruiker);
+    public void unSubscribe(Subscriber subscriber){
+        subscribers.remove(subscriber);
     }
 
     public void notifyNieuweOpdracht(Opdracht opdracht) {
-        for (Gebruiker gebruiker : subscribers) {
-            gebruiker.update(opdracht);
+        for (Subscriber subscriber : subscribers) {
+            subscriber.update(opdracht);
         }
     }
 

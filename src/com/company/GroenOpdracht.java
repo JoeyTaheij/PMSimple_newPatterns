@@ -9,4 +9,15 @@ public class GroenOpdracht extends Opdracht {
         this.deadline = deadline;
         this.type = "Groen";
     }
+
+    @Override
+    void addImage() { }
+
+    @Override
+    void addLocation() { }
+
+    @Override
+    boolean opdrachtWantsLocation() {
+        return false;
+    }
 }
